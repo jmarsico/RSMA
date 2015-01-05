@@ -1,0 +1,114 @@
+#N canvas 179 22 1224 756 10;
+#X declare -lib oscx;
+#X text 470 54 OSC messages have two parts \, the identifier and the
+data. The idenifier is made up of symbols separated by slashes ("/").
+[OSCroute] is similar to [route] but is specifically for OSC messages.
+;
+#X obj 471 20 import oscx;
+#X obj 505 124 dumpOSC 1234;
+#X text 586 124 output messages from port 1234;
+#X obj 483 217 OSCroute /TSPS;
+#X obj 850 316 print personData;
+#X obj 483 181 switch 2;
+#X obj 483 150 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 550 19 import the osc library;
+#X text 541 179 switches between inlets;
+#X text 584 216 route everything that starts with "/TSPS";
+#X text 783 266 route everything that starts with /personUpdated;
+#X floatatom 744 358 5 0 0 0 - - -;
+#X floatatom 598 412 5 0 0 0 - - -;
+#X floatatom 634 412 5 0 0 0 - - -;
+#X floatatom 670 412 5 0 0 0 - - -;
+#X floatatom 706 412 5 0 0 0 - - -;
+#X floatatom 741 412 5 0 0 0 - - -;
+#X floatatom 777 412 5 0 0 0 - - -;
+#X floatatom 812 412 5 0 0 0 - - -;
+#X floatatom 847 412 5 0 0 0 - - -;
+#X floatatom 883 412 5 0 0 0 - - -;
+#X floatatom 919 412 5 0 0 0 - - -;
+#X obj 787 357 unpack s f f f f f f f f f f f f f f f f f f f;
+#X floatatom 955 412 5 0 0 0 - - -;
+#X floatatom 991 412 5 0 0 0 - - -;
+#X floatatom 1026 412 5 0 0 0 - - -;
+#X floatatom 1061 412 5 0 0 0 - - -;
+#X floatatom 1097 412 5 0 0 0 - - -;
+#X floatatom 1133 412 5 0 0 0 - - -;
+#X text 9 455 OPENTSPS PROTOCOL 0: pid \; 1: oid \; 2: age \; 3: centroid.x
+\; 4: centroid.y \; 5: velocity.x \; 6: velocity.y \; 7: depth \; 8:
+boundingRect.x \; 9: boundingRect.y \; 10: boundingRect.width \; 11:
+boundingRect.height \; 12: highest.x 13: highest.y 14: haarRect.x \;
+- will be 0 if hasHaar == false 15: haarRect.y \; - will be 0 if hasHaar
+== false 16: haarRect.width \; - will be 0 if hasHaar == false 17:
+haarRect.height \; - will be 0 if hasHaar == false 18: opticalFlowVectorAccumulation.x
+\; 19: opticalFlowVectorAccumulation.y \; 20+ : contours (if enabled)
+;
+#X obj 787 285 OSCroute /personUpdated;
+#X obj 484 276 OSCroute /personEntered;
+#X obj 456 304 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 8 346 address: /TSPS/scene 0: currentTime 1: percentCovered
+2: numPeople 3: averageMotion.x 4: averageMotion.y;
+#X obj 489 303 print personEnter;
+#X floatatom 444 449 5 0 0 0 - - -;
+#X floatatom 298 503 5 0 0 0 - - -;
+#X floatatom 334 503 5 0 0 0 - - -;
+#X floatatom 370 503 5 0 0 0 - - -;
+#X floatatom 406 503 5 0 0 0 - - -;
+#X floatatom 441 503 5 0 0 0 - - -;
+#X floatatom 477 503 5 0 0 0 - - -;
+#X floatatom 512 503 5 0 0 0 - - -;
+#X floatatom 547 503 5 0 0 0 - - -;
+#X floatatom 583 503 5 0 0 0 - - -;
+#X floatatom 619 503 5 0 0 0 - - -;
+#X obj 487 448 unpack s f f f f f f f f f f f f f f f f f f f;
+#X floatatom 655 503 5 0 0 0 - - -;
+#X floatatom 691 503 5 0 0 0 - - -;
+#X floatatom 726 503 5 0 0 0 - - -;
+#X floatatom 761 503 5 0 0 0 - - -;
+#X floatatom 797 503 5 0 0 0 - - -;
+#X floatatom 833 503 5 0 0 0 - - -;
+#X connect 2 0 6 1;
+#X connect 4 0 31 0;
+#X connect 4 0 32 0;
+#X connect 6 0 4 0;
+#X connect 7 0 6 0;
+#X connect 23 0 12 0;
+#X connect 23 1 13 0;
+#X connect 23 2 14 0;
+#X connect 23 3 15 0;
+#X connect 23 4 16 0;
+#X connect 23 5 17 0;
+#X connect 23 6 18 0;
+#X connect 23 7 19 0;
+#X connect 23 8 20 0;
+#X connect 23 9 21 0;
+#X connect 23 10 22 0;
+#X connect 23 11 24 0;
+#X connect 23 12 25 0;
+#X connect 23 13 26 0;
+#X connect 23 14 27 0;
+#X connect 23 15 28 0;
+#X connect 23 16 29 0;
+#X connect 31 0 5 0;
+#X connect 31 0 23 0;
+#X connect 32 0 33 0;
+#X connect 32 0 35 0;
+#X connect 32 0 47 0;
+#X connect 47 0 36 0;
+#X connect 47 1 37 0;
+#X connect 47 2 38 0;
+#X connect 47 3 39 0;
+#X connect 47 4 40 0;
+#X connect 47 5 41 0;
+#X connect 47 6 42 0;
+#X connect 47 7 43 0;
+#X connect 47 8 44 0;
+#X connect 47 9 45 0;
+#X connect 47 10 46 0;
+#X connect 47 11 48 0;
+#X connect 47 12 49 0;
+#X connect 47 13 50 0;
+#X connect 47 14 51 0;
+#X connect 47 15 52 0;
+#X connect 47 16 53 0;

@@ -1,0 +1,4 @@
+#N canvas 528 146 762 489 10;
+#X obj 100 100 send \$0-arduino-out;
+#X obj 100 56 receive \$0-arduino;
+#X obj 100 79 arduino 1;
