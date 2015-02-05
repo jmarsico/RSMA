@@ -59,7 +59,7 @@ void mouseMoved() {
 void oscEvent(OscMessage theOscMessage) {
   /* print the address pattern and the typetag of the received OscMessage */
   //println(theOscMessage.addrPattern());
-  if(theOscMessage.addrPattern() == "/test")
+  if(theOscMessage.checkAddrPattern("/test")==true)
   {
     int intX = theOscMessage.get(0).intValue();  
     int intY = theOscMessage.get(1).intValue();
