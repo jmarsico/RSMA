@@ -15,14 +15,14 @@ void setDmxChannel(int channel, int value) {
 void setup() {
   size(640, 320);
   println(Serial.list());
-  myPort = new Serial(this, Serial.list()[0], 9600);
+  myPort = new Serial(this, Serial.list()[7], 9600);
   
 }
 
 void draw() {
   
   val = 255 * (mouseX/width);
-  setDmxChannel(1, val);
-  
+//  setDmxChannel(1, val);
+  myPort.write(val);  
 }
 
