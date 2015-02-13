@@ -1,4 +1,4 @@
-/* Code based on perlin function in this source
+  /* Code based on perlin function in this source
  http://code.google.com/p/britable/source/browse/trunk/britable/britable.pde#
  http://code.google.com/p/britable/
  
@@ -21,6 +21,8 @@ float perlinTimePosition;
 int mappedVal= 0;
 int minVal = 30;
 //int maxVal = 100;
+
+
 int valDiff = 70;
 
 
