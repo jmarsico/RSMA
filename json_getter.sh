@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -k https://CMU_Students:Energy1%3F@128.2.109.159/piwebapi/streams/A0EDrCQspyh10qS-uAmnJ8eXAL0kemPll5BGfhGhbNZgNbw8T76JDZWhlUE9yV5tbOekwMTI4LjIuMTA5LjE1OVxDQU1QVVMgU1VCTUVURVJJTkdcTUFJTiBDQU1QVVNcR0FURVN8UE9XRVIgSU5URU5TSVRZ/value > jakeTest.json
