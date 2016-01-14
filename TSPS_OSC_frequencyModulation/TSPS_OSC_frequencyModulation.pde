@@ -97,6 +97,11 @@ void draw()
 // in real-time using the mouse.
 void oscEvent(OscMessage theOscMessage) {
   /* check if theOscMessage has the address pattern we are looking for. */
+  if(theOscMessage.checkAddrPattern("/TSPS/scene/") == true){
+    println(theOscMessage);
+    
+  }
+  
 
   if (theOscMessage.checkAddrPattern("/TSPS/personUpdated/")==true) {
     /* we will only look at the order ID (OID) */
