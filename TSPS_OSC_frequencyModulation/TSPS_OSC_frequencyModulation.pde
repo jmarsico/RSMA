@@ -23,6 +23,12 @@ OscP5 osc;
 // the Oscil we use for modulating frequency.
 Oscil fm;
 
+Oscil wave;
+
+// variables to store the location0 of first person in TSPS (OID = 0)
+PVector location0;
+PVector location1;
+
 // setup is run once at the beginning
 void setup()
 {
@@ -38,7 +44,7 @@ void setup()
 
   // make the Oscil we will hear.
   // arguments are frequency, amplitude, and waveform
-  Oscil wave = new Oscil( 200, 0.8, Waves.SQUARE );
+  wave = new Oscil( 200, 0.8, Waves.SINE );
   // make the Oscil we will use to modulate the frequency of wave.
   // the frequency of this Oscil will determine how quickly the
   // frequency of wave changes and the amplitude determines how much.
@@ -51,6 +57,10 @@ void setup()
   fm.patch( wave.frequency );
   // and patch wave to the output
   wave.patch( out );
+  
+  location0 = new PVector(0,0);
+  location1 = new PVector(0,0);
+  
 }
 
 // draw is run many times
@@ -61,8 +71,7 @@ void draw()
   // draw using a white stroke
   stroke( 255 );
   // draw the waveforms
-  for ( int i = 0; i < out.bufferSize() - 1; i++ )
-  {
+  for ( int i = 0; i < out.bufferSize() - 1; i++ ){
     // find the x position of each buffer value
     float x1  =  map( i, 0, out.bufferSize(), 0, width );
     float x2  =  map( i+1, 0, out.bufferSize(), 0, width );
@@ -70,7 +79,16 @@ void draw()
     line( x1, 50 + out.left.get(i)*50, x2, 50 + out.left.get(i+1)*50);
     line( x1, 150 + out.right.get(i)*50, x2, 150 + out.right.get(i+1)*50);
   }  
-
+  
+  //map TSPS location0 (0-1) to our window
+  float windowX0 = map(location0.x, 0., 1., 0., width);
+  float windowY0= map(location0.x, 0., 1., 0., height);
+  ellipse(windowX0,windowY0, 10, 10);
+  
+  float windowX1 = map(location1.x, 0., 1., 0., width);
+  float windowY1= map(location1.x, 0., 1., 0., height);
+  ellipse(windowX1,windowY1, 10, 10);
+  
   text( "Modulation frequency: " + fm.frequency.getLastValue(), 5, 15 );
   text( "Modulation amplitude: " + fm.amplitude.getLastValue(), 5, 30 );
 }
@@ -84,23 +102,25 @@ void oscEvent(OscMessage theOscMessage) {
     /* we will only look at the order ID (OID) */
     if (theOscMessage.get(1).intValue() == 0) {
       /* parse theOscMessage and extract the values from the osc message arguments. */
-      float centroidX = theOscMessage.get(3).floatValue();  
-      float centroidY = theOscMessage.get(4).floatValue();
+      location0.x = theOscMessage.get(3).floatValue();  
+      location0.y = theOscMessage.get(4).floatValue();
 
-
-      float modulateAmount = map( centroidX, 0, 1, 220, 1 );
-      float modulateFrequency = map( centroidY, 0, 1, 0.1, 100 );
+      float modulateAmount = map( location0.x, 0, 1, 220, 1 );
+      float modulateFrequency = map( location0.y, 0, 1, 0.1, 100 );
 
       fm.setFrequency( modulateFrequency );
       fm.setAmplitude( modulateAmount );
       return;
-    }
+    }  
   }
  else if(theOscMessage.checkAddrPattern("/TSPS/personEntered/")==true) {
    println("person entered!!!");
- } else if(theOscMessage.checkAddrPattern("/TSPS/personWillLeave/")==true)
- {
+   fill(200,150);
+ } else if(theOscMessage.checkAddrPattern("/TSPS/personWillLeave/")==true){
    //do something else
+   fm.setAmplitude(0.);
+   fill(0);
+   
  }
 }
 
