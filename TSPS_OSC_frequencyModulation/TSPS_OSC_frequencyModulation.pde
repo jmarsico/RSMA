@@ -1,3 +1,5 @@
+
+
 /* based on frequency modulation example by Damien Di Fede
  
  A simple example for doing FM (frequency modulation) using two Oscils.
@@ -67,7 +69,7 @@ void setup()
 void draw()
 {
   // erase the window to black
-  background( 0 );
+  background(255,0,0 );
   // draw using a white stroke
   stroke( 255 );
   // draw the waveforms
