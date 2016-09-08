@@ -1,6 +1,6 @@
 //create json object, which will store the json file
 JSONObject json;
-String myURL = "https://www.kimonolabs.com/api/38lcd9rw?apikey=No7h5YUcyCWbbn7xjG0ukUrDZTpjWFUU";
+String myURL = "http://api.wunderground.com/api/1e6c70af66a69318/forecast/q/15201.json";
 float spacing;
 
 
@@ -18,39 +18,51 @@ void draw(){
 
 
 void loaddata(){
-  JSONObject results = json.getJSONObject("results");
   
-  JSONArray collection = results.getJSONArray("collection1");
+ 
+  JSONObject results = json.getJSONObject("forecast").getJSONObject("simpleforecast");
+  print(results);
+  
+  JSONArray collection = results.getJSONArray("forecastday");
   
   int sizeOfCollection = collection.size();
+  
   
   spacing = width/sizeOfCollection;
   
   for(int i = 0; i < sizeOfCollection; i++)
   {
-    JSONObject quake = collection.getJSONObject(i);
-    float mag = quake.getFloat("");
-    JSONObject location = quake.getJSONObject("location");
-    String loc = location.getString("text");
-    println(mag);
-    println(loc);
+   JSONObject day = collection.getJSONObject(i);
+   int high = day.getJSONObject("high").getInt("fahrenheit");
+   int low = day.getJSONObject("low").getInt("fahrenheit");
+   println("high: " + high);
+   println("low: " + low);
     
-    float x = spacing * i +10;
-    float h = height - mag*10;
+   float x = spacing * i + 40;
+   float h = height - high * 1.6;
     
-    stroke(0);
-    strokeWeight(5);
-    line(x, height, x, h);
+   stroke(255,0,0);
+   strokeWeight(20);
+   line(x, height, x, h);
+   fill(0);
+   text(high, x + 15, h);
+   
+   h = height - low;
     
-    fill(0);
-    textAlign(LEFT);
-    strokeWeight(1);
-    pushMatrix();
-    translate(x,h);
-    rotate(-HALF_PI);
-    text(loc, 0,0);
-    popMatrix();
+   stroke(0,0,255);
+   strokeWeight(20);
+   line(x, height, x, h);
+   fill(0);
+   text(low, x + 15, h);
+    
+   //fill(0);
+   //textAlign(LEFT);
+   //strokeWeight(1);
+   //pushMatrix();
+   //translate(x,h);
+   //rotate(-HALF_PI);
+   //text(loc, 0,0);
+   //popMatrix();
     
   }
 }
-

@@ -32,7 +32,8 @@ void setup() {
 void loop() {
 ////////////// POTENTIOMETER /////////////////////
   int potVal = analogRead(pot);
-  analogWrite(potLED,map(potVal, 0, 1023, 0, 255));
+  potVal = map(potVal, 0, 1023, 0, 255);
+  analogWrite(potLED,potVal);
 //  Serial.print("Potentiometer: ");
 //  Serial.println(potVal);
 
@@ -40,13 +41,15 @@ void loop() {
 ////////////// PHOTO RESISTOR /////////////////////
   int photoVal = analogRead(photoRes);
   photoVal = constrain(photoVal, 700, 1000);
-  analogWrite(photoLED, map(photoVal, 700, 1000, 0, 255));
+  photoVal = map(photoVal, 700, 1000, 0, 255);
+  analogWrite(photoLED, photoVal);
 //  Serial.print("Photoresistor: ");
 //  Serial.println(photoVal);
 
 ////////////// PRESSURE SENSOR ///////////////////// 
   int pressureVal = analogRead(pressure);
-  analogWrite(pressureLED,map(pressureVal, 0, 1023, 0, 255));
+  pressureVal = map(pressureVal, 0, 1023, 0, 255);
+  analogWrite(pressureLED, pressureVal);
 //  Serial.print("Pressure: ");
 //  Serial.println(pressureVal);
 
@@ -73,7 +76,8 @@ void loop() {
 
   // calculate the average:
   average = total / numReadings;
-  analogWrite(micLED, map(average, 50, 900, 0, 255));
+  average = map(average, 50, 900, 0, 255);
+  analogWrite(micLED, average);
 //  Serial.print("Mic: " );
 //  Serial.println(micVal);
 
