@@ -13,7 +13,6 @@ void setup(){
 void draw(){
   delay(60000);
   loaddata();
-  
 }
 
 
