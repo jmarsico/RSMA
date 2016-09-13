@@ -1,6 +1,6 @@
 //create json object, which will store the json file
 JSONObject json;
-String myURL = "http://api.wunderground.com/api/1e6c70af66a69318/forecast/q/15201.json";
+String myURL = "http://api.wunderground.com/api/xxx/forecast/q/15201.json";
 
 
 void setup(){
