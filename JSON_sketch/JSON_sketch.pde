@@ -18,7 +18,7 @@ void draw(){
 
 void loaddata(){
   //fetch the JSON object from our URL
-  json = loadJSONObject(myURL);
+  json = `(myURL);
   println(json);
   
   //get the "forecast" object from the larger packet
@@ -26,7 +26,7 @@ void loaddata(){
   
   //inside the "forecast" we want "simpleforecast"
   JSONObject results = forecast.getJSONObject("simpleforecast");
-  println(results);
+  //println(results);
   
   //inside "simpleforecast" we want the Array called "forecastday"
   JSONArray collection = results.getJSONArray("forecastday");

@@ -1,5 +1,6 @@
 
-//    /sound/bass 1.0 3 "hi"
+
+
 /* based on frequency modulation example by Damien Di Fede
  
  A simple example for doing FM (frequency modulation) using two Oscils.
@@ -104,6 +105,7 @@ void oscEvent(OscMessage theOscMessage) {
     
   }
   
+// /TSPS/personUpdated/ 104829 0 0.134 0.1241 a;l as;lkj dkr4u1409u 109413 
 
   if (theOscMessage.checkAddrPattern("/TSPS/personUpdated/")==true) {
     /* we will only look at the order ID (OID) */
@@ -117,18 +119,15 @@ void oscEvent(OscMessage theOscMessage) {
 
       fm.setFrequency( modulateFrequency );
       fm.setAmplitude( modulateAmount );
-      
       return;
     }  
   }
  else if(theOscMessage.checkAddrPattern("/TSPS/personEntered/")==true) {
    println("person entered!!!");
    fill(200,150);
-   //wave.setAmplitude(0.8);
  } else if(theOscMessage.checkAddrPattern("/TSPS/personWillLeave/")==true){
    //do something else
    fm.setAmplitude(0.);
-   //wave.setAmplitude(0.);
    fill(0);
    
  }
